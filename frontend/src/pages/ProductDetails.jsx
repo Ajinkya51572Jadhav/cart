@@ -12,6 +12,7 @@ import Context from "../context";
 
 const ProductDetails = () => {
   const {fetchUserCartCount}= useContext(Context);
+
   const { productId } = useParams();
   const [productDetails, setProductDetails] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ const ProductDetails = () => {
         setLoading(false);
         setProductDetails(data?.product);
       }
+      
     } catch (error) {
       toast.error(error?.message, {
         autoClose: 2000,
@@ -181,7 +183,7 @@ const ProductDetails = () => {
         )}
       </div>
       <>
-        {productDetails?.category &&(
+        {productDetails?.category && (
           <HorizontalCardProduct
             category={productDetails?.category}
             heading={"Recommend Product"}

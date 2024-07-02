@@ -11,36 +11,54 @@ import Context from "./context";
 import { useDispatch } from "react-redux";
 import { setUserDetails ,setUserCount} from "./store/userSlice";
 
-
+   
 
 function App() {
   const dispatch = useDispatch();
 
   async function fetchUserDetails() {
-    const { data } = await axios.get(Api.user.url,{
-      withCredentials: true
-    });
-
-    if (data?.status){
-      dispatch(setUserDetails(data?.user));
-    }else{
-      toast.error(data?.message);
+    try {
+      const { data } = await axios.get(Api.user.url,{
+        withCredentials: true
+      });
+  
+      if (data?.status){
+        dispatch(setUserDetails(data?.user));
+      }else{
+        toast.error(data?.message);
+      }  
+    } catch (error) {
+        toast.error(error.message,{
+          autoClose:true,
+          position:"top-right"
+        })
     }
-
   };
 
 
   async function fetchUserCartCount() {
-    const { data } = await axios.get(Api.countAdded.url,{
-      withCredentials:true
-    });
-    console.log("countdata",data);
 
-    if (data?.status){
-      dispatch(setUserCount(data?.count));
-    }else{
-      toast.error(data?.message);
-    };
+    try {
+      
+      const { data } = await axios.get(Api.countAdded.url,{
+        withCredentials:true
+      });
+      console.log("countdata",data);
+  
+      if (data?.status){
+        dispatch(setUserCount(data?.count));
+      }else{
+        toast.error(data?.message);
+      };
+
+
+    } catch (error) {
+      toast.error(error.message,{
+        autoClose:true,
+        position:"top-right"
+      })
+    }
+   
   }
 
   useEffect(() => {

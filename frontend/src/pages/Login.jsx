@@ -15,10 +15,7 @@ const Login = () => {
   const [handleData, setHandleData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setHandleData((pre) => ({
-      ...pre,
-      [e.target.name]: e.target.value,
-    }));
+    setHandleData((pre) => ({...pre,[e.target.name]: e.target.value,}));
   };
 
   

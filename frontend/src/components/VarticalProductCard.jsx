@@ -101,6 +101,7 @@ const VerticalProductCard = ({ category, heading }) => {
               {productCategory?.map((product) => (
                 <NavLink
                  to={`/product-details/${product?._id}`}
+                 onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}
                   key={product.id}
                   className="w-full min-w-[280px] md:min-w-[320px] p-4 "
                 >

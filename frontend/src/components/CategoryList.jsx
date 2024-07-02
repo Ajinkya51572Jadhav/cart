@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import "../../src/App.css";
 
 
-
+ 
 const CategoryList = () => {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -45,9 +45,6 @@ const CategoryList = () => {
       <div  key={`categoryLoading ${index}`}     className=" h-16 w-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-slate-200">
       </div>
       ))
-       
-
-        
 
     ) : ( 
          <> 

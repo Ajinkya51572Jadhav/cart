@@ -20,6 +20,6 @@ import {createSlice} from "@reduxjs/toolkit";
     } 
   });
 
-     export const {setUserDetails,setUserCount} = UserSlice.actions;
+  export const {setUserDetails,setUserCount} = UserSlice.actions;
 
      export default UserSlice.reducer; 

@@ -21,7 +21,7 @@ export const Header = () => {
   console.log("count",count);
 
   const [menuDisplay, setMenuDisplay] = useState(false);
-
+ 
 
 
 
@@ -57,6 +57,15 @@ export const Header = () => {
 
 
 
+       const handleSearch=(e)=>{
+        let val = e.target.value;
+           
+        if(val){
+           navigate(`/search?query=${val}`);  
+        }
+      };
+
+
 
 
 
@@ -71,9 +80,9 @@ export const Header = () => {
             />
           </NavLink>
         </div>
-
-        <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow-sm pl-2'>
-          <input type='search' placeholder='Search Product Here...' className='w-full outline-none' />
+{/* hidden */}
+        <div className=' lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow-sm pl-2'>
+          <input type='search' placeholder='Search Product Here...' onChange={(e)=>handleSearch(e)} className='w-full outline-none' />
           <div className='text-lg min-w-[50px]  h-8 bg-red-600 flex items-center  justify-center  rounded-r-full text-white '>
             <GrSearch />
           </div>
@@ -116,12 +125,12 @@ export const Header = () => {
 
           </div>
 
-          <div className='text-2xl relative'>
+          <NavLink to={"/cart"} className='text-2xl relative'>
             <span><FaCartShopping /></span>
             <div className='bg-red-600 text-white w-5 h-5 p-1 rounded-full flex items-center justify-center absolute -top-2 -right-3'>
-              <p className='text-xs'>{count || 0}</p>
+             <p className='text-xs'>{count || 0}</p>
             </div>
-          </div>
+          </NavLink>
 
           <div>
             {

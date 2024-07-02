@@ -9,13 +9,15 @@ import AllUsers from "../pages/AllUsers";
 import AllProducts from "../pages/AllProducts";
 import CategoryProduct from "../pages/CategoryProduct";
 import ProductDetails from "../pages/ProductDetails";
+import Cart from "../pages/Cart";
+import SeacrchProduct from "../components/SeacrchProduct";
 
 const router = createBrowserRouter([
     {
    path:"/", 
    element:<App/>,
-   children:[ 
-    {
+   children:[  
+    { 
         path:"",
         element:<Home/>
     },
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
     {
         path:"/product-details/:productId",
         element:<ProductDetails/>
+    },
+    {
+        path:"/cart",
+        element:<Cart/>
+    },
+    {
+        path:"/search",
+        element:<SeacrchProduct/>
     },
     {
      path:"/admin",

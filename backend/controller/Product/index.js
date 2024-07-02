@@ -149,18 +149,18 @@ exports.getProductCategories = async (req, res) => {
     try {
         const categories = await productModel.distinct("category");
 
-         const productCategory =[];
+        const productCategory = [];
         //  for (let i = 0; i < categories.length; i++) {
         //     const element = categories[i];
         //     const product = await productModel.find({category:element});
         //     productCategory.push(product);
         //  };
 
-        for(const cate of categories){
-            const product = await productModel.findOne({category:cate});
+        for (const cate of categories) {
+            const product = await productModel.findOne({ category: cate });
             productCategory.push(product);
         }
-         console.log("productCate",productCategory);
+        console.log("productCate", productCategory);
 
 
         return res.json({
@@ -177,22 +177,22 @@ exports.getProductCategories = async (req, res) => {
     }
 }
 
-exports.getCategoryWiseProduct =async(req,res)=>{
+exports.getCategoryWiseProduct = async (req, res) => {
     try {
-        const {category} = req.body;
-        const categoryproduct = await productModel.find({category:category});
-             if(!categoryproduct){
-                return res.json({
-                    status: false,
-                    message:"Category product not found"
-                }).status(500);
-             }
+        const { category } = req.body;
+        const categoryproduct = await productModel.find({ category: category });
+        if (!categoryproduct) {
+            return res.json({
+                status: false,
+                message: "Category product not found"
+            }).status(500);
+        }
 
         return res.json({
             status: true,
             category: categoryproduct,
         }).status(200);
-        
+
     } catch (error) {
         return res.json({
             status: false,
@@ -204,35 +204,66 @@ exports.getCategoryWiseProduct =async(req,res)=>{
 
 
 
-exports.getProductDetails =async(req,res)=>{
-      try {
-        const {product_id} = req.body;
+exports.getProductDetails = async (req, res) => {
+    try {
+        const { product_id } = req.body;
         const product = await productModel.findById(product_id);
-        
-        if(!product){ 
-        return res.json({
-         status:false,
-         message:"Product Not Found"
-        }).status(500);
+
+        if (!product) {
+            return res.json({
+                status: false,
+                message: "Product Not Found"
+            }).status(500);
         }
-         
-      return  res.json({
-             status:true,
-            product:product,
+
+        return res.json({
+            status: true,
+            product: product,
         }).status(200)
 
-        
-      } catch (error) {
-       return   res.json({
-            status:false,
-            message:error.message
-          }).status(500)
-      }
+
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: error.message
+        }).status(500)
+    }
 }
 
 
 
+exports.handleSeach = async (req, res) => {
+    try {
 
+        console.log("search", req.query);
+
+        const regix = new RegExp(req.query.query,"i","g");
+
+        const search = await productModel.find(
+            {
+                "$or": [{
+                    productName: regix,
+
+                }
+                    , {
+                    category: regix
+                }]
+            }
+        );
+
+        return res.json({
+            status: true,
+            search: search,
+        })
+
+
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: error.message
+        }).status(500)
+    }
+}
 
 
 

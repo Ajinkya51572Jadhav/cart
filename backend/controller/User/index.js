@@ -214,29 +214,3 @@ exports.updateUSer = async (req, res) => {
         }).status(500);
     }
 };
-
-exports.countAdded= async(req,res)=>{
-   try {
-    const userId = req.userId;
-     console.log("userIdd",userId);
-
-     const count = await cartModel.countDocuments({ user_id: userId });
-     console.log("count",count);
-
-     return res.json({
-        count:count,
-        status:true,
-      });
-
-   } catch (error) {
-    
-    return res.json({
-        message:error.message,
-        status:false,
-      });
-
-   }
-     
-     
-}
-

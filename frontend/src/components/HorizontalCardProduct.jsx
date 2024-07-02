@@ -82,6 +82,7 @@ const HorizontalCardProduct = ({ category, heading ,refresh}) => {
             <NavLink
               to={`/product-details/${product?._id}`}
               style={{ transform: `translateX(-${count * 50}%)` }}
+              onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}
               className="w-full min-w-[280px] bg-white md:min-w-[320px] h-36  max-w-[280px]  md:max-w-[320px]  rounded-sm shadow flex"
               
              >
