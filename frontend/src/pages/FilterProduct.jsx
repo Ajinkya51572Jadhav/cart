@@ -5,55 +5,21 @@ import { toast } from "react-toastify";
 import { Api } from "../common";
 import "react-toastify/dist/ReactToastify.css";
 import { displayCurrency } from "../helpers/displayCurrency";
-import { addToCart } from "./AddToCart";
+import { addToCart } from "../components/AddToCart";
 import Context from "../context";
 import { useDebounce } from "use-debounce";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-const SearchProduct = () => {
-  const { fetchUserCartCount } = useContext(Context);
-  const { search } = useLocation();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [debouncedSearch] = useDebounce(search, 500);
+const filterProduct = ({filterProducts,loading}) => {
 
-  useEffect(() => {
-    if (debouncedSearch) {
-      handleSearch();
-    }
-  }, [debouncedSearch]);
-
+    console.log("checked product",filterProducts);
   const LoadingList = new Array(13).fill(null);
 
-  async function handleSearch() {
-    try {
-      setLoading(true);
-      const { data } = await axios.get(`${Api.search.url}${debouncedSearch}`);
-      console.log("search data", data);
-      setLoading(false);
-      if (data?.status) {
-        setProduct(data?.search); // Adjust this according to your API response structure
-      } else {
-        toast.error("Product not found", {
-          autoClose: 2000,
-          position: "top-right",
-          hideProgressBar: false,
-        });
-      }
-    } catch (error) {
-      setLoading(false);
-      toast.error(error.message, {
-        autoClose: 2000,
-        position: "top-right",
-        hideProgressBar: false,
-      });
-    }
-  }
 
   return (
     <div className="container mx-auto px-4 my-6">
       <h2 className="text-2xl font-semibold py-2">
-        {product?.length > 0 ? (
+        {filterProducts?.length > 0 ? (
           <>
             <button className="bg-red-500 hover:bg-red-700 text-white font-light  px-4 rounded">
               <NavLink to={"/"}>
@@ -76,7 +42,7 @@ const SearchProduct = () => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {loading ? (
           <>
-            {LoadingList.map((_, index) => (
+            {LoadingList?.map((_, index) => (
               <div
                 key={index}
                 className="w-full bg-white h-72 rounded-sm shadow flex flex-col p-4 animate-pulse"
@@ -95,7 +61,7 @@ const SearchProduct = () => {
             ))}
           </>
         ) : (
-          product?.map((product) => (
+          filterProducts?.map((product) => (
             <NavLink
               key={product?._id}
               to={`/product-details/${product?._id}`}
@@ -142,4 +108,4 @@ const SearchProduct = () => {
   );
 };
 
-export default SearchProduct;
+export default filterProduct;

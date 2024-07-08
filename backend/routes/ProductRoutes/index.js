@@ -2,7 +2,7 @@
 
 
 const express = require('express');
-const { createProduct, getAllProducts, singleProductUpdate, singleProductDelete, getProductCategories, getCategoryWiseProduct, getProductDetails, handleSeach} = require('../../controller/Product');
+const { createProduct, getAllProducts, singleProductUpdate, singleProductDelete, getProductCategories, getCategoryWiseProduct, getProductDetails, handleSeach, filteredProducts } = require('../../controller/Product');
 const authToken = require('../../middleware/authToken');
 
 
@@ -11,10 +11,11 @@ product.post("/product-upload", authToken, createProduct);
 product.get("/products", getAllProducts);
 product.post("/product_edit_admin", authToken, singleProductUpdate);
 product.post("/product_delete_admin", authToken, singleProductDelete);
-product.get("/product_category",getProductCategories);
-product.post("/category",getCategoryWiseProduct);
-product.post("/product-details",getProductDetails);
-product.get("/search",handleSeach);
+product.get("/product_category", getProductCategories);
+product.post("/category", getCategoryWiseProduct);
+product.post("/product-details", getProductDetails);
+product.get("/search", handleSeach);
+product.post("/filter", filteredProducts)
 
 
 module.exports = product;    

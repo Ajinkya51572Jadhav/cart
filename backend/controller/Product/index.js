@@ -237,7 +237,7 @@ exports.handleSeach = async (req, res) => {
 
         console.log("search", req.query);
 
-        const regix = new RegExp(req.query.query,"i","g");
+        const regix = new RegExp(req.query.query, "i", "g");
 
         const search = await productModel.find(
             {
@@ -266,4 +266,23 @@ exports.handleSeach = async (req, res) => {
 }
 
 
+exports.filteredProducts = async (req, res) => {
+    try {
+        console.log("categoryList", [...req.body]);
 
+        const product = await productModel.find({
+            category: { "$in": req.body }
+        });
+
+        return res.json({
+            status: true,
+            filter: product,
+        })
+
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: error.message
+        }).status(500)
+    }
+}; 
