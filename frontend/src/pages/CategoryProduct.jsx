@@ -9,15 +9,18 @@ import FilterProduct from "./FilterProduct";
 const CategoryProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const urlSearch = new URLSearchParams(location?.search);  
+  const urlSearch = new URLSearchParams(location?.search);
   const refreshUrlthenProductShow = urlSearch.getAll("category");
-    console.log("refreshUrlthenProductShow",refreshUrlthenProductShow);
+  console.log("refreshUrlthenProductShow", refreshUrlthenProductShow);
 
   console.log("location", location);
   const [filterData, setFilterData] = useState([]);
   const [statefilter, setstatefilter] = useState({});
-  const [filterCategory, setFilterCategory] = useState(refreshUrlthenProductShow || []);
+  const [filterCategory, setFilterCategory] = useState(
+    refreshUrlthenProductShow || []
+  );
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState("");
 
   console.log("filterCategory", filterCategory);
 
@@ -27,34 +30,31 @@ const CategoryProduct = () => {
   console.log("cate", urlcategoryList);
 
   // commints
-    useEffect(()=>{
-      
-        if(filterCategory.length > 0){
-          getFilterProducts();          
-        }
-        async function getFilterProducts(){
+  useEffect(() => {
+    if (filterCategory.length > 0) {
+      getFilterProducts();
+    }
+    async function getFilterProducts() {
+      try {
+        setLoading(true);
+        const { data } = await axios.post(
+          `${Api?.filter?.url}`,
+          filterCategory
+        );
+        console.log("datacheckApi", data);
 
-          try {
-            setLoading(true);
-            const { data } = await axios.post(`${Api?.filter?.url}`, filterCategory);
-            console.log("datacheckApi", data);
-      
-            if (data?.status) {
-              setFilterData(data?.filter);
-              setLoading(false);
-            }
-          } catch (error) {
-            toast.error(error?.message, {
-              autoClose: 2000,
-              position: "top-right",
-            });
-          }
+        if (data?.status) {
+          setFilterData(data?.filter);
+          setLoading(false);
         }
-        
-      
-    },[filterCategory]);
-
-  
+      } catch (error) {
+        toast.error(error?.message, {
+          autoClose: 2000,
+          position: "top-right",
+        });
+      }
+    }
+  }, [filterCategory]);
 
   useEffect(() => {
     const checkedValueFalse = Object.fromEntries(
@@ -73,9 +73,6 @@ const CategoryProduct = () => {
     if (formatUrl) {
       navigate(`/product-category?${formatUrl}`);
     }
-    
-    
-
   }, [filterCategory]);
 
   function handleChange(e) {
@@ -95,6 +92,19 @@ const CategoryProduct = () => {
 
   console.log("statefilter", statefilter);
 
+  function handleSortByPrice(e) {
+    const { value } = e.target;
+    setSort(value);
+
+    if (value == "asc") {
+      setFilterData((pre) => pre.sort((a, b) => a.selling - b.selling));
+    }
+
+    if (value == "dsc") {
+      setFilterData((pre) => pre.sort((a, b) => b.selling - a.selling));
+    }
+  }
+
   return (
     <div className="container mx-auto p-4">
       <div className="lg:grid grid-cols-[200px,1fr]">
@@ -112,12 +122,24 @@ const CategoryProduct = () => {
 
             <form className="text-sm flex flex-col gap-2 py-2">
               <div className="flex items-center gap-3">
-                <input type="radio" name="sortby" />
+                <input
+                  type="radio"
+                  name="sortby"
+                  value={"asc"}
+                  checked={sort == "asc"}
+                  onChange={(e) => handleSortByPrice(e)}
+                />
                 <label>Price - Low to High</label>
               </div>
 
               <div className="flex items-center gap-3">
-                <input type="radio" name="sortby" />
+                <input
+                  type="radio"
+                  name="sortby"
+                  value={"dsc"}
+                  checked={sort == "dsc"}
+                  onChange={(e) => handleSortByPrice(e)}
+                />
                 <label>Price - High to Low</label>
               </div>
             </form>
@@ -153,11 +175,13 @@ const CategoryProduct = () => {
             </form>
           </div>
         </div>
-      {/* Right Side product */}
-      <div className="flex">{filterData && <FilterProduct filterProducts={filterData} loading={loading}/>}</div>
+        {/* Right Side product */}
+        <div className="flex">
+          {filterData && (
+            <FilterProduct filterProducts={filterData} loading={loading} />
+          )}
+        </div>
       </div>
-
-     
     </div>
   );
 };
