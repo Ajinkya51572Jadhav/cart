@@ -10,11 +10,11 @@ import Context from "../context";
 import { useDebounce } from "use-debounce";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-const filterProduct = ({filterProducts,loading}) => {
+const filterProduct = ({ filterProducts, loading }) => {
+  const { fetchUserCartCount } = useContext(Context);
 
-    console.log("checked product",filterProducts);
+  console.log("checked product", filterProducts);
   const LoadingList = new Array(13).fill(null);
-
 
   return (
     <div className="container mx-auto px-4 my-6">
@@ -30,13 +30,13 @@ const filterProduct = ({filterProducts,loading}) => {
           </>
         ) : (
           <>
-          <button className="bg-red-500 hover:bg-red-700 text-white font-light  px-4 rounded">
-            <NavLink to={"/"}>
-              <FaArrowLeftLong />
-            </NavLink>
-          </button>{" "}
-          <span>back to home</span>
-        </>
+            <button className="bg-red-500 hover:bg-red-700 text-white font-light  px-4 rounded">
+              <NavLink to={"/"}>
+                <FaArrowLeftLong />
+              </NavLink>
+            </button>{" "}
+            <span>back to home</span>
+          </>
         )}
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -95,7 +95,7 @@ const filterProduct = ({filterProducts,loading}) => {
                   onClick={(e) =>
                     addToCart(e, product?._id, fetchUserCartCount)
                   }
-                  className="bg-red-600 hover:bg-red-700 px-3 rounded py-1 text-white w-full"
+                  className="bg-yellow-500 hover:bg-yellow-600 px-3 rounded py-1 text-white w-full"
                 >
                   Add To Cart
                 </button>

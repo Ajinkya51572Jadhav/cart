@@ -16,28 +16,26 @@ import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 const BannerProduct = () => {
   const [current, setCurrent] = useState(0);
 
-
-
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 2000); //768
 
-  const desktopImages = [ image5,image1, image2, image3, image4];
+  const desktopImages = [image5, image1, image2, image3, image4];
 
   const mobileImages = [
     image1Mobile,
     image2Mobile,
     image3Mobile,
-    image4Mobile, 
+    image4Mobile,
     image5Mobile,
   ];
 
   const images = isMobile ? mobileImages : desktopImages;
 
   const nextImage = () => {
-      setCurrent((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+    setCurrent((prev) => (prev < images.length - 1 ? prev + 1 : 0));
   };
 
   const prevImage = () => {
-      setCurrent((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+    setCurrent((prev) => (prev > 0 ? prev - 1 : images.length - 1));
   };
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import UploadImage from "../helpers/UploadImage";
 import { MdDelete } from "react-icons/md";
 import DisplayImage from "../components/DisplayImage";
 
-const UploadProduct = ({ onClose,refresh }) => {
+const UploadProduct = ({ onClose, refresh }) => {
   const [data, setData] = useState({
     productName: "",
     brnadName: "",
@@ -20,9 +20,9 @@ const UploadProduct = ({ onClose,refresh }) => {
     price: "",
     selling: "",
   });
-    
-     console.log("Datas",data);
-    
+
+  console.log("Datas", data);
+
   const [openfullScreen, setOpenFullScreen] = useState(false);
   const [showfullScreen, setShowFullScreen] = useState();
 
@@ -38,12 +38,12 @@ const UploadProduct = ({ onClose,refresh }) => {
   async function handleData(e) {
     e.preventDefault();
 
-     console.log("data payload ",data)
+    console.log("data payload ", data);
 
     const payload = data;
     try {
-      const { data } = await axios.post(Api.uploadProducts.url, payload,{
-        withCredentials: true
+      const { data } = await axios.post(Api.uploadProducts.url, payload, {
+        withCredentials: true,
       });
 
       if (data?.status) {
@@ -241,8 +241,8 @@ const UploadProduct = ({ onClose,refresh }) => {
 
           <button
             type="submit"
-            className="px-3 py-2 bg-red-600 text-white 
-           mb-10 hover:bg-red-700 mt-5
+            className="px-3 py-2  text-white 
+           mb-10  mt-5 bg-yellow-500 hover:bg-yellow-600
           "
           >
             upload

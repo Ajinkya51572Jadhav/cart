@@ -143,8 +143,8 @@ const Cart = () => {
   }
 
   const quantityTotal = cart.reduce((prev, curr) => prev + curr.quantity, 0);
-  const totalPrice = cart.reduce((prev, curr) =>
-     prev + curr.quantity * curr.product_id.selling,
+  const totalPrice = cart.reduce(
+    (prev, curr) => prev + curr.quantity * curr.product_id.selling,
     0
   );
 
@@ -246,7 +246,7 @@ const Cart = () => {
                 <span>{displayCurrency(totalPrice)}</span>
               </div>
             </div>
-            <button className="mt-4 w-full bg-red-500 hover:bg-red-700 text-white py-2 rounded">
+            <button className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded">
               Proceed to Checkout
             </button>
           </div>

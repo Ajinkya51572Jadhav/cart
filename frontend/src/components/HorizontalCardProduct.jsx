@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFetchCategoryWiseProduct } from "../helpers/useFetchCategoryWiseProduct";
 import { displayCurrency } from "../helpers/displayCurrency";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
@@ -6,9 +6,8 @@ import { NavLink } from "react-router-dom";
 import { addToCart } from "./AddToCart";
 import Context from "../context";
 
-
-const HorizontalCardProduct = ({ category, heading ,refresh}) => {
-  const {fetchUserCartCount}= useContext(Context);
+const HorizontalCardProduct = ({ category, heading, refresh }) => {
+  const { fetchUserCartCount } = useContext(Context);
   const [count, setCount] = useState(0);
   const { productCategory, loading } = useFetchCategoryWiseProduct(category);
   const LoadingList = new Array(13).fill(null);
@@ -56,7 +55,6 @@ const HorizontalCardProduct = ({ category, heading ,refresh}) => {
 
         {loading ? (
           <>
-          
             {LoadingList.map((_, index) => (
               <div
                 style={{ transform: `translateX(-${count * 50}%)` }}
@@ -82,17 +80,17 @@ const HorizontalCardProduct = ({ category, heading ,refresh}) => {
             <NavLink
               to={`/product-details/${product?._id}`}
               style={{ transform: `translateX(-${count * 50}%)` }}
-              onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="w-full min-w-[280px] bg-white md:min-w-[320px] h-36  max-w-[280px]  md:max-w-[320px]  rounded-sm shadow flex"
-              
-             >
-              <div onClick={refresh} className="bg-slate-200 h-full p-2 min-w-[120px] md:min-w-[145px] rounded">
-              
-              <img
+            >
+              <div
+                onClick={refresh}
+                className="bg-slate-200 h-full p-2 min-w-[120px] md:min-w-[145px] rounded"
+              >
+                <img
                   src={product?.productImage[0]}
                   className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply"
-              />
-
+                />
               </div>
               <div className="p-2 grid">
                 <h2 className="md:text-lg line-clamp-1 text-ellipsis">
@@ -108,8 +106,10 @@ const HorizontalCardProduct = ({ category, heading ,refresh}) => {
                   </p>
                 </div>
                 <button
-                  onClick={(e) => addToCart(e, product?._id,fetchUserCartCount)}
-                  className="bg-red-600 hover:bg-red-700 px-3 rounded py-1 mt-1 text-white"
+                  onClick={(e) =>
+                    addToCart(e, product?._id, fetchUserCartCount)
+                  }
+                  className="bg-yellow-500 hover:bg-yellow-600  px-3 rounded py-1 mt-1 text-white"
                 >
                   Add To Cart
                 </button>

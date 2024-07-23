@@ -10,11 +10,11 @@ import UploadImage from "../helpers/UploadImage";
 import { MdDelete } from "react-icons/md";
 import DisplayImage from "../components/DisplayImage";
 
-const AdminEditProduct = ({ onClose, dataDe ,refresh}) => {
+const AdminEditProduct = ({ onClose, dataDe, refresh }) => {
   console.log("Datas", dataDe);
 
   const [data, setData] = useState({
-    // ...dataDe, 
+    // ...dataDe,
     _id: dataDe?._id,
     productName: dataDe.productName || "",
     brnadName: dataDe?.brnadName || "",
@@ -171,10 +171,10 @@ const AdminEditProduct = ({ onClose, dataDe ,refresh}) => {
                   return (
                     <div className="relative cursor-pointer rounded-md">
                       <div
-                        className="absolute cursor-pointer 
+                        className="absolute cursor-pointer
                        bottom-0 right-0 p-1 text-white bg-red-600 rounded-full
                        group-hover:block z-10
-                       
+
                     "
                       >
                         <MdDelete onClick={() => handleDeleteProfile(index)} />
@@ -241,9 +241,10 @@ const AdminEditProduct = ({ onClose, dataDe ,refresh}) => {
 
           <button
             type="submit"
-            className="px-3 py-2 bg-red-600 text-white 
-         mb-10 hover:bg-red-700 mt-5
-        "
+            className="px-3 py-2  text-white
+             mb-10  mt-5
+          bg-yellow-500 hover:bg-yellow-600
+         "
           >
             upload
           </button>

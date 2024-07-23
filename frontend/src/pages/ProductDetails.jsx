@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Api } from "../common";
@@ -9,9 +9,8 @@ import HorizontalCardProduct from "../components/HorizontalCardProduct";
 import { addToCart } from "../components/AddToCart";
 import Context from "../context";
 
-
 const ProductDetails = () => {
-  const {fetchUserCartCount}= useContext(Context);
+  const { fetchUserCartCount } = useContext(Context);
 
   const { productId } = useParams();
   const [productDetails, setProductDetails] = useState([]);
@@ -21,7 +20,6 @@ const ProductDetails = () => {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
 
   const LoadingList = new Array(4).fill(null);
-
 
   useEffect(() => {
     getSingleProductDetails();
@@ -38,7 +36,6 @@ const ProductDetails = () => {
         setLoading(false);
         setProductDetails(data?.product);
       }
-      
     } catch (error) {
       toast.error(error?.message, {
         autoClose: 2000,
@@ -140,7 +137,9 @@ const ProductDetails = () => {
                       className="w-full h-full min-h-[385px] min-w-[760px] cursor-pointer"
                       style={{
                         backgroundImage: `url(${imageShow})`,
-                        backgroundPosition: `${zoomPosition.x + 10}% ${zoomPosition.y}%`,
+                        backgroundPosition: `${zoomPosition.x + 10}% ${
+                          zoomPosition.y
+                        }%`,
                       }}
                     ></div>
                   </div>
@@ -165,11 +164,15 @@ const ProductDetails = () => {
                 <p>{displayCurrency(productDetails?.selling)}</p>
               </div>
               <div className="flex items-center gap-1 text-base font-light">
-                <button  className="border-2 bg-white border-red-400 text-red-600 px-3 py-1 min-w-[100px] hover:text-white hover:bg-red-700 rounded">
+                <button className="border-2 bg-white border-red-400 text-red-600 px-3 py-1 min-w-[100px] hover:text-white hover:bg-red-700 rounded">
                   Buy
                 </button>
-                <button onClick={(e)=>addToCart(e,productDetails?._id,fetchUserCartCount)}
-                 className="border-2 bg-red-600 text-white px-3 py-1 min-w-[100px] hover:text-white hover:bg-red-700 rounded">
+                <button
+                  onClick={(e) =>
+                    addToCart(e, productDetails?._id, fetchUserCartCount)
+                  }
+                  className="bg-yellow-500 hover:bg-yellow-600 border-2 text-white px-3 py-1 min-w-[100px] hover:text-white  rounded"
+                >
                   Add To Cart
                 </button>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFetchCategoryWiseProduct } from "../helpers/useFetchCategoryWiseProduct";
 import { displayCurrency } from "../helpers/displayCurrency";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { addToCart } from "./AddToCart";
 import Context from "../context";
 
 const VerticalProductCard = ({ category, heading }) => {
-  const {fetchUserCartCount}= useContext(Context  );
+  const { fetchUserCartCount } = useContext(Context);
   const [count, setCount] = useState(0);
   const { productCategory, loading } = useFetchCategoryWiseProduct(category);
   const LoadingList = new Array(13).fill(null);
@@ -18,7 +18,7 @@ const VerticalProductCard = ({ category, heading }) => {
     if (isMobile && productCategory.length > 0) {
       interval = setInterval(() => {
         setCount((prev) => (prev + 1) % productCategory.length);
-      },2000); // Change slide every 3 seconds
+      }, 2000); // Change slide every 3 seconds
     }
     return () => {
       if (interval) clearInterval(interval);
@@ -54,54 +54,45 @@ const VerticalProductCard = ({ category, heading }) => {
 
         <div className="overflow-x-scroll">
           {loading ? (
-
-          <div
-          className="flex transition-transform duration-300"
-          style={{ transform: `translateX(-${count * 50}%)` }}
-        >
-          {LoadingList?.map((_) => (
             <div
-              className="w-full min-w-[280px] md:min-w-[320px] p-4"
+              className="flex transition-transform duration-300"
+              style={{ transform: `translateX(-${count * 50}%)` }}
             >
-              <div className="flex flex-col  rounded-lg shadow-md overflow-hidden">
-                <div className="bg-slate-200 flex items-center justify-center h-48 animate-pulse p-1">
-                  {/* <img
+              {LoadingList?.map((_) => (
+                <div className="w-full min-w-[280px] md:min-w-[320px] p-4">
+                  <div className="flex flex-col  rounded-lg shadow-md overflow-hidden">
+                    <div className="bg-slate-200 flex items-center justify-center h-48 animate-pulse p-1">
+                      {/* <img
                     src={product.productImage[0]}
                     className="object-contain  w-full h-full p-5  hover:scale-110 transition-all mix-blend-multiply"
                     alt={product.productName}
                   /> */}
-                </div>
+                    </div>
 
-                <div className="p-4 bg-white">
-                  <h2 className="text-lg font-semibold truncate bg-slate-200 animate-pulse p-1">
-                  </h2>
-                  <p className="text-gray-600 bg-slate-200 animate-pulse p-1"></p>
-                  <div className="flex items-center justify-between mt-2">
-                    <p className="text-gray-500 line-through p-3 bg-slate-200 animate-pulse" >
-                      
-                    </p>
-                    <p className=" font-medium p-3  bg-slate-200 animate-pulse">
-                     
-                    </p>
+                    <div className="p-4 bg-white">
+                      <h2 className="text-lg font-semibold truncate bg-slate-200 animate-pulse p-1"></h2>
+                      <p className="text-gray-600 bg-slate-200 animate-pulse p-1"></p>
+                      <div className="flex items-center justify-between mt-2">
+                        <p className="text-gray-500 line-through p-3 bg-slate-200 animate-pulse"></p>
+                        <p className=" font-medium p-3  bg-slate-200 animate-pulse"></p>
+                      </div>
+                      <button className=" w-full mt-4 py-2 rounded text-white p-5 bg-slate-200 animate-pulse h-7 "></button>
+                    </div>
                   </div>
-                  <button className=" w-full mt-4 py-2 rounded text-white p-5 bg-slate-200 animate-pulse h-7 ">
-                   
-                  </button>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
           ) : (
             <div
-            
               className="flex transition-transform duration-300"
               style={{ transform: `translateX(-${count * 50}%)` }}
             >
               {productCategory?.map((product) => (
                 <NavLink
-                 to={`/product-details/${product?._id}`}
-                 onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}
+                  to={`/product-details/${product?._id}`}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                   key={product.id}
                   className="w-full min-w-[280px] md:min-w-[320px] p-4 "
                 >
@@ -127,7 +118,12 @@ const VerticalProductCard = ({ category, heading }) => {
                           {displayCurrency(product.selling)}
                         </p>
                       </div>
-                      <button onClick={(e)=>addToCart(e,product?._id,fetchUserCartCount)} className="bg-red-600 hover:bg-red-700 w-full mt-4 py-2 rounded text-white">
+                      <button
+                        onClick={(e) =>
+                          addToCart(e, product?._id, fetchUserCartCount)
+                        }
+                        className="bg-yellow-500 hover:bg-yellow-600 w-full mt-4 py-2 rounded text-white"
+                      >
                         Add To Cart
                       </button>
                     </div>
