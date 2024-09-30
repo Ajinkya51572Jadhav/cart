@@ -1,7 +1,7 @@
 
 
 
-import Logo from '../assest/assest/naptol.jpg';
+// import Logo from '../assest/assest/naptol.jpg';
 import { GrSearch } from 'react-icons/gr';
 import { FaRegCircleUser, FaCartShopping } from 'react-icons/fa6';
 import { Link, NavLink } from 'react-router-dom';
@@ -77,7 +77,7 @@ export const Header = () => {
       <div className='container mx-auto h-full flex  items-center px-4 justify-between'>
         <div className=''>
           <NavLink to={"/"}>
-            <img src={Logo} width={90} height={50} />
+            {/* <img src={Logo} width={90} height={50} /> */}
           </NavLink>
         </div>
         {/* hidden */}
