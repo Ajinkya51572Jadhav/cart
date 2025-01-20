@@ -18,7 +18,9 @@ const BannerProduct = () => {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 2000); //768
 
-  const desktopImages = [image5, image1, image2, image3, image4];
+  const desktopImages = [
+    image5, image1, image2, image3, image4
+  ];
 
   const mobileImages = [
     image1Mobile,
