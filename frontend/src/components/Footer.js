@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className='flex flex-col md:flex-row justify-between items-center'>
           <div className='mb-6 md:mb-0'>
             <h2 className='text-xl font-semibold'>Company Name</h2>
-            <p className='text-gray-600 mt-2'>Providing quality services since 2024.</p>
+            <p className='text-gray-600 mt-2'>Providing quality services since 2025.</p>
           </div>
           <div className='flex flex-col md:flex-row gap-8 mb-6 md:mb-0'>
             <div>
@@ -36,7 +36,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className='text-center mt-6'>
-          <p className='text-gray-500 text-sm'>© 2024 Company Name. All rights reserved.</p>
+          <p className='text-gray-500 text-sm'>© 2025 Company Name. All rights reserved.</p>
         </div>
       </div>
     </footer>
